@@ -8,6 +8,7 @@ public class Player : NetworkBehaviour
 
     private void Start()
     {
+        DontDestroyOnLoad(this);
         SpawnCharacter();
     }
     private void SpawnCharacter()
