@@ -4,7 +4,7 @@ public class PlayerCharacter : Character
     [Range(0, 100)] [SerializeField] private int health = 100;
     [Range(0.5f, 10.0f)] [SerializeField] private float movingSpeed = 8.0f;
     [SerializeField] private float acceleration = 3.0f;
-    private const float gravity = -9.8f;
+    private const float gravity = 0;
     private CharacterController characterController;
     private MouseLook mouseLook;
     private Vector3 currentVelocity;
@@ -40,11 +40,12 @@ public class PlayerCharacter : Character
             movement = transform.TransformDirection(movement);
             characterController.Move(movement);
             mouseLook.Rotation();
-            CmdUpdatePosition(transform.position);
+            CmdUpdatePosition(transform.position, transform.rotation);
         }
         else
         {
             transform.position = Vector3.SmoothDamp(transform.position, serverPosition, ref currentVelocity, movingSpeed * Time.deltaTime);
+            transform.rotation = serverRotation;
         }
     }
     private void Start()
